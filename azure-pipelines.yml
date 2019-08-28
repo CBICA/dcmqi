@@ -132,13 +132,15 @@ jobs:
         artifactName: '$(Build.DefinitionName)_installer_Windows'
         downloadPath: '$(System.ArtifactsDirectory)'
 
-- job: 'XenialBuild'
-  displayName: "End-to-end Linux (Xenial) build"
+- job: 'CentOSBuild'
+  displayName: "End-to-end Linux (CentOS) build on Docker"
   timeoutInMinutes: 0
   cancelTimeoutInMinutes: 300
 
   pool:
     vmImage: 'Ubuntu-16.04'
+  
+  container: centos
 
   steps:
     - checkout: self  # self represents the repo where the initial Pipelines YAML file was found
