@@ -195,7 +195,7 @@ jobs:
         cd bin
         cmake -DCMAKE_INSTALL_PREFIX="./install" -DBUILD_TESTING=OFF -DDCMQI_BUILD_DOC=OFF ..
         make -j2
-        make install/strip
+        make install
       displayName: 'Configure and compile CaPTk'
 
     # Build a package
@@ -326,7 +326,7 @@ jobs:
         export CMAKE_PREFIX_PATH="/Library/TeX/texbin"
         cmake -DDCMQI_BUILD_DOC=OFF ../
 
-        make -j 2 install/strip
+        make -j 2 install
 
         tar cvfz install_macos.zip install
 
