@@ -15,15 +15,15 @@ endif()
 find_package(SlicerExecutionModel REQUIRED)
 include(${SlicerExecutionModel_USE_FILE})
 
-#-----------------------------------------------------------------------------
-set(MODULE_NAME segimage2itkimage)
+# #-----------------------------------------------------------------------------
+# set(MODULE_NAME segimage2itkimage)
 
-#-----------------------------------------------------------------------------
-SEMMacroBuildCLI(
-  NAME ${MODULE_NAME}
-  TARGET_LIBRARIES dcmqi
-  EXECUTABLE_ONLY
-  )
+# #-----------------------------------------------------------------------------
+# SEMMacroBuildCLI(
+#   NAME ${MODULE_NAME}
+#   TARGET_LIBRARIES dcmqi
+#   EXECUTABLE_ONLY
+#   )
 
 #-----------------------------------------------------------------------------
 set(MODULE_NAME itkimage2segimage)
