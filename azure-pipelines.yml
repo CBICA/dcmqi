@@ -69,7 +69,7 @@ jobs:
     #     setx PATH "%PATH%;$(Build.SourcesDirectory)/bin/qt/5.12.1/bin"
     #     cmake --build . --target ALL_BUILD --config Release
     #     rm -rf binaries_windows.zip
-    #   displayName: 'Configure and compile CaPTk'
+    #   displayName: 'Configure and compile DCMQI'
        
     # - powershell: |
     #     wmic logicaldisk get size,freespace,caption
@@ -190,13 +190,13 @@ jobs:
         tar cvfz bin_linux.tar.gz bin
       displayName: 'Zipping Superbuild'
     
-    # Configure and build CaPTk
+    # Configure and build DCMQI
     - bash: |
         cd bin
         cmake -DCMAKE_INSTALL_PREFIX="./install" -DBUILD_TESTING=OFF -DDCMQI_BUILD_DOC=OFF ..
         make -j2
         make install
-      displayName: 'Configure and compile CaPTk'
+      displayName: 'Configure and compile DCMQI'
 
     # Build a package
     - bash: |
@@ -298,7 +298,7 @@ jobs:
         export CMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE
         export CMAKE_PREFIX_PATH="/Library/TeX/texbin"
 
-        sudo rm -rf CaPTk_*
+        sudo rm -rf DCMQI_*
 
         cmake -DDCMQI_BUILD_DOC=OFF ../
         rm CMakeCache.txt
@@ -307,7 +307,7 @@ jobs:
         cmake -DDCMQI_BUILD_DOC=OFF ../
 
         make -j 2
-      displayName: 'Export variables for llvm then configure and compile CaPTk'
+      displayName: 'Export variables for llvm then configure and compile DCMQI'
     
     - bash: |
         cd bin
@@ -316,9 +316,9 @@ jobs:
         pkgname="_Installer"
         pkgname="$version$pkgname"
 
-        sudo rm -rf CaPTk_$version.app/Contents/Resources/bin/ITK-SNAP.app
+        sudo rm -rf DCMQI_$version.app/Contents/Resources/bin/ITK-SNAP.app
 
-        rm -rf CaPTk*.app
+        rm -rf DCMQI*.app
 
         cmake -DDCMQI_BUILD_DOC=OFF ../
         rm CMakeCache.txt
@@ -326,7 +326,7 @@ jobs:
         export CMAKE_PREFIX_PATH="/Library/TeX/texbin"
         cmake -DDCMQI_BUILD_DOC=OFF ../
 
-        make -j 2 install
+        make -j 2 install/strip
 
         tar cvfz install_macos.zip install
 
