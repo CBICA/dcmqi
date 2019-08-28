@@ -156,13 +156,20 @@ jobs:
           "bin_linux.tar.gz"
       displayName: 'Caching'
 
-    # Dependency manager
     - bash: |
-        sudo apt-get update && sudo apt-get install -qq gcc-4.8 g++-4.8 make libgl-dev cmake python3-pip python-numpy dos2unix libxkbcommon-x11-0 doxygen
+        wget https://cmake.org/files/v3.12/cmake-3.12.4-Linux-x86_64.tar.gz
+        tar -xvf cmake-3.12.4-Linux-x86_64.tar.gz
+        export PATH=`pwd`/cmake-3.12.4-Linux-x86_64/bin/:$PATH
+      displayName: 'CMake installation'
+
+    # # Dependency manager
+    # - bash: |
+    #     sudo apt-get update && sudo apt-get install -qq gcc-4.8 g++-4.8 make libgl-dev cmake python3-pip python-numpy dos2unix libxkbcommon-x11-0 doxygen
         
-      displayName: 'Install dependencies from Aptitude'
+    #   displayName: 'Install dependencies from Aptitude'
 
     - bash: |
+        export PATH=`pwd`/cmake-3.12.4-Linux-x86_64/bin/:$PATH
         tar xvfz bin_linux.tar.gz
         rm -rf bin_linux.tar.gz
         ls
@@ -181,6 +188,7 @@ jobs:
 
     # Configure and build superbuild
     - bash: |
+        export PATH=`pwd`/cmake-3.12.4-Linux-x86_64/bin/:$PATH
         mkdir -p bin
         cd bin
         cmake -DCMAKE_INSTALL_PREFIX="./installLibs" -DDCMQI_BUILD_DOC=OFF ..
@@ -194,6 +202,7 @@ jobs:
     
     # Configure and build DCMQI
     - bash: |
+        export PATH=`pwd`/cmake-3.12.4-Linux-x86_64/bin/:$PATH
         cd bin
         cmake -DCMAKE_INSTALL_PREFIX="./install" -DBUILD_TESTING=OFF -DDCMQI_BUILD_DOC=OFF ..
         make -j2
