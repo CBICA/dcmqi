@@ -34,7 +34,6 @@ jobs:
 
     - script: |
         choco install doxygen.install 
-        git lfs install
       displayName: 'Install dependencies'
   
     - bash: |
@@ -50,6 +49,7 @@ jobs:
       condition: eq(variables.CACHE_RESTORED_WINDOWS, 'true')
 
     - script: |
+        mkdir -p bin
         cd bin
         call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="./installLibs" -DCMAKE_CONFIGURATION_TYPES="Release" -DDCMQI_BUILD_DOC=OFF ..
@@ -179,6 +179,7 @@ jobs:
 
     # Configure and build superbuild
     - bash: |
+        mkdir -p bin
         cd bin
         cmake -DCMAKE_INSTALL_PREFIX="./installLibs" -DDCMQI_BUILD_DOC=OFF ..
         make -j2
@@ -274,6 +275,7 @@ jobs:
       condition: eq(variables.CACHE_RESTORED_MAC, 'true')
 
     - bash: |
+        mkdir -p bin
         cd bin
 
         export CMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE
@@ -348,7 +350,7 @@ jobs:
         # ls
         tar cvfz bin_macos.tar.gz bin_macos
       displayName: 'Zipping bin'
-      
+
     - task: PublishBuildArtifacts@1
       inputs:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)'
