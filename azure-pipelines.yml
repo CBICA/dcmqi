@@ -91,9 +91,9 @@ jobs:
         cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="./install" -DCMAKE_CONFIGURATION_TYPES="Release" -DITK_DIR=./ITK-build -DSlicerExecutionModel=./SlicerExecutionModel-build -DBUILD_TESTING=OFF ..
         cmake --build . --target INSTALL --config Release
 
-        tar cvfz install_windows.zip install
+        tar cvfz install_windows.tar.gz install
 
-        mv install_windows.zip $(Build.ArtifactStagingDirectory)
+        mv install_windows.tar.gz $(Build.ArtifactStagingDirectory)
         
         cd ../
         
@@ -214,9 +214,9 @@ jobs:
         rm -rf src
         rm -rf docs*
 
-        tar cvfz install_linux.zip install
+        tar cvfz install_linux.tar.gz install
 
-        mv install_linux.zip $(Build.ArtifactStagingDirectory)
+        mv install_linux.tar.gz $(Build.ArtifactStagingDirectory)
         
       displayName: 'Set up environment variables for packager and build a package'
 
@@ -339,9 +339,9 @@ jobs:
 
         make -j 2 install/strip
 
-        tar cvfz install_macos.zip install
+        tar cvfz install_macos.tar.gz install
 
-        mv install_macos.zip $(Build.ArtifactStagingDirectory)
+        mv install_macos.tar.gz $(Build.ArtifactStagingDirectory)
 
       displayName: 'Ensure documentation is picked up properly'
     
