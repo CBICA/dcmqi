@@ -36,7 +36,7 @@ namespace cbica
     istringstream metainfoisstream(metadata);
     metainfoisstream >> metaRoot;
 
-    std::vector< typename ShortImageType::Pointer > segmentations; // we will only have one segmentation file
+    std::vector< ShortImageType::Pointer > segmentations; // we will only have one segmentation file
     segmentations.push_back(reader->GetOutput());
 
     if (metaRoot.isMember("segmentAttributesFileMapping"))
@@ -54,7 +54,7 @@ namespace cbica
       Json::Value reorderedSegmentAttributes;
       std::vector<int> fileOrder(segImageFiles.size());
       fill(fileOrder.begin(), fileOrder.end(), -1);
-      std::vector< typename ShortImageType::Pointer > segmentationsReordered(segImageFiles.size());
+      std::vector< ShortImageType::Pointer > segmentationsReordered(segImageFiles.size());
       for (size_t filePosition = 0; filePosition < segImageFiles.size(); filePosition++)
       {
         for (size_t mappingPosition = 0; mappingPosition < segImageFiles.size(); mappingPosition++)
